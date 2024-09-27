@@ -2,6 +2,7 @@ package deus.paraglider;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.block.model.BlockModel;
+import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +54,7 @@ public class ParagliderMod implements ModInitializer, GameStartEntrypoint, Recip
 
 	@Override
 	public void initNamespaces() {
+		Registries.RECIPES.register("paraglider", ParagliderModRecipes.PARAGLIDER);
 
 	}
 }
