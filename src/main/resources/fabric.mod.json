@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "paraglider",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Paraglider",
+  "description": "This mod aims to give you a paraglider",
   "authors": [
-    "Turnip Labs"
+    "@Garkatron"
   ],
   "contact": {
     "homepage": "",
@@ -19,20 +19,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-			"turniplabs.examplemod.ExampleMod"
+			"deus.paraglider.ParagliderMod"
     ],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"deus.paraglider.ParagliderMod"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"deus.paraglider.ParagliderMod"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"deus.paraglider.ParagliderMod"
 		]
 	},
   "mixins": [
-      "examplemod.mixins.json"
+		"paraglider.mixins.json"
   ],
 
   "depends": {
