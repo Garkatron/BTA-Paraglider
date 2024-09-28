@@ -9,8 +9,12 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.slot.Slot;
 import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.world.World;
+
+import javax.swing.plaf.synth.SynthTextAreaUI;
+import java.time.format.SignStyle;
 
 public class ParagliderItem extends Item {
 
@@ -35,30 +39,50 @@ public class ParagliderItem extends Item {
 		activated = !activated;
 
 
-		this.minecraft.sndManager.playSound("random.click", SoundCategory.GUI_SOUNDS, 1.0F, 1.0F);
+		//world.playSoundEffect(entityplayer, SoundCategory.GUI_SOUNDS, entityplayer.x, entityplayer.y, entityplayer.z, "random.click", 1.0f, 1.0f);
 
+		if (minecraft!=null) {
+			this.minecraft.sndManager.playSound("random.click", SoundCategory.GUI_SOUNDS, 1.0F, 1.0F);
+		}
 
 		return super.onUseItem(itemstack, world, entityplayer);
 	}
+
 
 	@Override
 	public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
 		super.inventoryTick(itemstack, world, entity, i, flag);
 
-
-		IGravityObject iLivingEntity = (IGravityObject) entity;
-
-
-		if (entity.onGround || entity.isInWater() || entity.isInLava()) {
+		if (itemstack == null || itemstack.stackSize<=0) {
+			entity.flySpeed = 0.02f;
 			activated = false;
-		}
 
-		if (activated) {
-			entity.flySpeed = 0.06f;
 
 		} else {
-			entity.flySpeed = 0.02f;
-			iLivingEntity.gravityLib$setYGravityScale(main.MOD_CONFIG.getDouble("overworld.y_gravity_scale.value"));
+			IGravityObject iLivingEntity = (IGravityObject) entity;
+
+			if (entity.onGround || entity.isInWater() || entity.isInLava()) {
+				activated = false;
+			}
+
+			if (activated) {
+				entity.flySpeed = 0.06f;
+
+			} else {
+				entity.flySpeed = 0.02f;
+				iLivingEntity.gravityLib$setYGravityScale(main.MOD_CONFIG.getDouble("overworld.y_gravity_scale.value"));
+			}
 		}
+
+		System.out.println(activated);
+
+	}
+
+	public void setActivated(boolean bool) {
+		activated = bool;
+	}
+
+	public boolean isActivated() {
+		return activated;
 	}
 }

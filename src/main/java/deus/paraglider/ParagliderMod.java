@@ -40,21 +40,11 @@ public class ParagliderMod implements ModInitializer, GameStartEntrypoint, Recip
 
 	@Override
 	public void onRecipesReady() {
-		RecipeBuilder.Shaped(MOD_ID).setShape(
-				" F ",
-				"LCL",
-				"SIS")
-			.addInput('F', Item.featherChicken)
-			.addInput('S', Item.string)
-			.addInput('L', Item.leather)
-			.addInput('C', Item.cloth)
-			.addInput('I', Item.ingotIron)
-			.create("ParagliderRecipe", paraglider.getDefaultStack());
+		ParagliderModRecipes.InitRecipes();
 	}
 
 	@Override
 	public void initNamespaces() {
-		Registries.RECIPES.register("paraglider", ParagliderModRecipes.PARAGLIDER);
-
+		ParagliderModRecipes.InitNameSpaces();
 	}
 }
